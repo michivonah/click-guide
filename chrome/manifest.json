@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "Cl1ck Gu1de",
+    "version": "0.0.1",
+    "description": "A browser add-on which records the steps clicked on a page and generates a easy to understand guide from it.",
+    "background": {
+      "service_worker": "background.js"
+    },
+    "permissions": ["tabs", "activeTab", "scripting"],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "assets/logo/color/logo16x16.png",
+        "48": "assets/logo/color/logo48x48.png",
+        "128": "assets/logo/color/logo128x128.png"
+      }
+    },
+    "content_scripts":[
+        {
+            "matches": ["<all_urls>"],
+            "js": ["content.js"]
+        }
+    ]
+  }

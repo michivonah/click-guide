@@ -1,0 +1,22 @@
+{
+    "title":"Guide Title",
+    "description":"Description of the guide",
+    "date":"2024-10-27",
+    "author":"Me",
+    "steps":[
+        {
+            "label":"Click login",
+            "description":"Short description of the step",
+            "action":"click",
+            "element":"#login",
+            "image":"data:image/jpeg;base64,..."
+        },
+        {
+            "label":"Click login",
+            "description":"Short description of the step",
+            "action":"click",
+            "element":"#login",
+            "image":"data:image/jpeg;base64,..."
+        }
+    ]
+}
