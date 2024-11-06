@@ -3,7 +3,8 @@
   "name": "Cl1ck Gu1de",
   "version": "0.0.2",
   "description": "A browser add-on which records the steps clicked on a page and generates a easy to understand guide from it.",
-  "permissions": ["scripting", "activeTab", "downloads", "tabCapture", "tabs"],
+  "permissions": ["scripting", "activeTab", "downloads", "tabs"],
+  "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js"
   },

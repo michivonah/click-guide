@@ -1,4 +1,5 @@
 // Script for Popup
+
 const toggleRecordingBtn = document.getElementById("toggleRecording");
 
 toggleRecordingBtn.addEventListener('click', () => {
