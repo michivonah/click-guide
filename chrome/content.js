@@ -7,7 +7,6 @@ document.addEventListener('click', function(){
     const element = event.target;
     const elementText = element.textContent; // gets the text of the clicked element
     const elementSelector = element.id; // the id of the clicked element, if exists (else its empty)
-    //console.log(elementText + ";" + elementSelector);
 
     const rect = element.getBoundingClientRect(); // create a rectangle from the element
 
@@ -30,7 +29,15 @@ document.addEventListener('click', function(){
                 );
 
                 const croppedDataUrl = canvas.toDataURL("image/jpeg");
-                console.log(croppedDataUrl);
+                chrome.runtime.sendMessage({
+                    action: "saveStep",
+                    image: croppedDataUrl,
+                    stepLabel: elementText,
+                    stepElement: elementSelector,
+                    triggerName: "click"
+                }, (response) => {
+                    console.log(response);
+                });
             };
         } else {
             console.error("Error, while capturing the screenshot:", response.error);
