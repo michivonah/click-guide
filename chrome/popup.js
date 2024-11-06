@@ -1,10 +1,7 @@
-let isRecording = false;
+// Script for Popup
+const toggleRecordingBtn = document.getElementById("toggleRecording");
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("toggle-recording").addEventListener("click", () => {
-    isRecording = !isRecording;
-    const message = isRecording ? "start" : "stop";
-    chrome.runtime.sendMessage({ action: message });
-    document.getElementById("toggle-recording").textContent = isRecording ? "Stop Recording" : "Start Recording";
-  });
+toggleRecordingBtn.addEventListener('click', () => {
+    console.log("Button clicked");
+    chrome.runtime.sendMessage({action: 'triggerName'});
 });
