@@ -9,7 +9,7 @@ Similar to tango.us/dubble.so/folge.me/magichow.co but all local - no data leave
 - [x] ability to save multiple steps
 - [x] export guide as json file
 - [ ] add recording start/stop functionality
-- [ ] create basic popup UI
+- [x] create basic popup UI
 
 ### Additional nice to have:
 - [ ] Viewer for Guide JSON
