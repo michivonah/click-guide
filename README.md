@@ -8,13 +8,16 @@ Similar to tango.us/dubble.so/folge.me/magichow.co but all local - no data leave
 - [x] create a screenshot of the steps
 - [x] ability to save multiple steps
 - [x] export guide as json file
-- [ ] add recording start/stop functionality
+- [x] add recording start/stop functionality
 - [x] create basic popup UI
 
 ### Additional nice to have:
 - [ ] Viewer for Guide JSON
+    - [ ] PDF export
 - [ ] Editor for Guide
 - [ ] improve error handling
+- [ ] Blur sensitive information
+- [x] Pause/resume recording feature
 
 ### Maybe far in the future:
 - [ ] Optional cloud for sharing guide as link

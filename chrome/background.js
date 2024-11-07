@@ -31,7 +31,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 return sendResponse({ success: false, message: error });
             }
         case "generateGuide":
-            return sendResponse({ success: true, guide: steps });;
+            return sendResponse({ success: true, guide: steps });
+        case "clearGuide":
+            steps = [];
+            return sendResponse({ success: true, message: "Cleared guide successfully" });
+        case "guideLenght":
+            count = steps.length;
+            return sendResponse({ success: true, stepCount: count });
         case "debug":
         default:
             console.log(message.action);
