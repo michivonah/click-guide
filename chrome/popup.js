@@ -38,7 +38,7 @@ function updateRecordingLabel(bool){
             action: "guideLenght"
         }, (response) => {
             if(response.stepCount !== 0) startLabel = "Resume";
-            toggleRecordingBtn.textContent = bool ? "Pause/Stop" : startLabel;
+            toggleRecordingBtn.textContent = bool ? "Pause / Stop" : startLabel;
         });
     }
     catch(error){
