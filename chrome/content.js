@@ -1,5 +1,22 @@
 // Script which is executed on all web pages
 
+// Page meta data
+const pageTitle = document.title;
+const domainFormatted = window.location.host.replace(/\./g, "-");
+
+// set guide title
+chrome.storage.local.get("guideTitle", (data) => {
+    if(!data.guideTitle){
+        try{
+            chrome.storage.local.set({ guideTitle: pageTitle });
+            chrome.storage.local.set({ exportFilename: domainFormatted });
+        }
+        catch(error){
+            console.error(`Error while saving guide metadata: ${error}`)
+        }
+    }
+});
+
 // load recording status & react to updates
 let isRecording = false;
 chrome.storage.local.get("recording", (data) => {

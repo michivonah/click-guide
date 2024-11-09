@@ -4,7 +4,6 @@
 let isRecording = false;
 chrome.storage.local.get("recording", (data) => {
     isRecording = data.recording || false;
-    console.log(data);
     updateRecordingLabel(isRecording);
 });
 
@@ -13,10 +12,14 @@ const toggleRecordingBtn = document.getElementById("toggleRecording");
 const exportBtn = document.getElementById("exportBtn");
 
 toggleRecordingBtn.addEventListener('click', () => {
-    //if(isRecording) chrome.runtime.sendMessage({action: "clearGuide"});
-    isRecording = !isRecording; // toggle status
-    updateRecordingLabel(isRecording); // update label
-    chrome.storage.local.set({ recording: isRecording }); // save status
+    try{
+        isRecording = !isRecording; // toggle status
+        updateRecordingLabel(isRecording); // update label
+        chrome.storage.local.set({ recording: isRecording }); // save status
+    }
+    catch(error){
+        console.error(`Got error on toggling recording: ${error}`)
+    }
 });
 
 exportBtn.addEventListener('click', () => {
@@ -24,8 +27,14 @@ exportBtn.addEventListener('click', () => {
     chrome.runtime.sendMessage({
         action: "generateGuide"
     }, (response) => {
-        const guide = response.guide;
-        exportJSON(guide, "guide.json");
+        if(response.success){
+            const guide = response.guide;
+            const filename = response.filename;
+            return exportJSON(guide, filename);
+        }
+        else{
+            console.error(`Failed to export guide: ${response.message} `);
+        }
     });
 });
 
@@ -48,18 +57,29 @@ function updateRecordingLabel(bool){
 
 // export guide as json
 function exportJSON(object, filename){
-    const json = JSON.stringify(object, null, 2);
+    try{
+        const json = JSON.stringify(object, null, 2);
 
-    const blob = new Blob([json], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
+        const blob = new Blob([json], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+    
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        link.click();
+    
+        URL.revokeObjectURL(url);
+    }
+    catch(error){
+        return error
+    }
 
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = filename;
-    link.click();
 
-    URL.revokeObjectURL(url);
-
-    // clear guide
-    chrome.runtime.sendMessage({action: "clearGuide"});
+    try{
+        // clear guide
+        return chrome.runtime.sendMessage({action: "clearGuide"});
+    }
+    catch(error){
+        return error
+    }
 }

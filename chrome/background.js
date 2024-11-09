@@ -1,20 +1,33 @@
 // Background Worker
 
+const dateToday = new Date().toISOString().split('T')[0];
+
+let guide = {
+    "title":"Guide",
+    "description":"",
+    "date":dateToday,
+    "author":"Me",
+};
 let steps = [];
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     switch(message.action){
         case "captureScreenshot":
-            chrome.tabs.captureVisibleTab(null, { format: "jpeg" }, (dataUrl) => {
-                if (chrome.runtime.lastError) {
-                    console.error("Error capturing screenshot: ", chrome.runtime.lastError);
-                    sendResponse({ success: false, error: chrome.runtime.lastError });
-                    return;
-                }
-    
-                sendResponse({ success: true, screenshot: dataUrl });
-            });
-            return true;
+            try{
+                chrome.tabs.captureVisibleTab(null, { format: "jpeg" }, (dataUrl) => {
+                    if (chrome.runtime.lastError) {
+                        console.error("Error capturing screenshot: ", chrome.runtime.lastError);
+                        sendResponse({ success: false, error: chrome.runtime.lastError });
+                        return;
+                    }
+        
+                    sendResponse({ success: true, screenshot: dataUrl });
+                });
+                return true;
+            }
+            catch(error){
+                return sendResponse({ success: false, message: error });
+            }
         case "saveStep":
             try{
                 const step = {
@@ -31,14 +44,35 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 return sendResponse({ success: false, message: error });
             }
         case "generateGuide":
-            return sendResponse({ success: true, guide: steps });
+            try{
+                let filename = "guide.json";
+                chrome.storage.local.get(["guideTitle", "exportFilename"], (data) => {
+                    if(data.guideTitle) guide.title = `Guide: ${data.guideTitle}`;
+                    if(data.exportFilename) filename = `guide-${data.exportFilename}.json`;
+                    guide.steps = steps;
+                    return sendResponse({ success: true, guide: guide, filename: filename });
+                });
+                return true;
+            }
+            catch(error){
+                return sendResponse({ success: false, message: error });
+            }
         case "clearGuide":
-            steps = [];
-            return sendResponse({ success: true, message: "Cleared guide successfully" });
+            try{
+                steps = [];
+                return sendResponse({ success: true, message: "Cleared guide successfully" });
+            }
+            catch(error){
+                return sendResponse({ success: false, message: error });
+            }
         case "guideLenght":
-            count = steps.length;
-            return sendResponse({ success: true, stepCount: count });
-        case "debug":
+            try{
+                count = steps.length;
+                return sendResponse({ success: true, stepCount: count });
+            }
+            catch(error){
+                return sendResponse({ success: false, message: error });
+            }
         default:
             console.log(message.action);
             break;

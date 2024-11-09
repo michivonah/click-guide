@@ -12,10 +12,11 @@ Similar to tango.us/dubble.so/folge.me/magichow.co but all local - no data leave
 - [x] create basic popup UI
 
 ### Additional nice to have:
+- [x] Meta data in guide (title, description, author, date)
 - [ ] Viewer for Guide JSON
     - [ ] PDF export
 - [ ] Editor for Guide
-- [ ] improve error handling
+- [x] improve error handling
 - [ ] Blur sensitive information
 - [x] Pause/resume recording feature
 
