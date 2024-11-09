@@ -1,4 +1,5 @@
 # click-guide
+![](/logo/github-banner.png)
 A browser add-on which records the steps clicked on a page and generates a easy to understand guide from it.
 
 Similar to tango.us/dubble.so/folge.me/magichow.co but all local - no data leaves your device
@@ -22,3 +23,6 @@ Similar to tango.us/dubble.so/folge.me/magichow.co but all local - no data leave
 
 ### Maybe far in the future:
 - [ ] Optional cloud for sharing guide as link
+
+## Mockup editor/viewer
+![](/logo/mockup-viewer-editor.jpg)
