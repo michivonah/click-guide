@@ -20,63 +20,41 @@
         <link rel="stylesheet" type="text/css" href="editor.css"/>
         <script src="editor.js" defer></script>
     </head>
-    <body>
+    <body class="viewer-disabled">
         <div class="content">
             <div class="nav">
                 <img id="logo" class="logo" src="../logo/logo-invert.png" alt="Logo">
             </div>
             <div class="toolList editor">
-                <button class="toolBtn">
+                <button id="importBtn" class="toolBtn">
                     <span class="material-symbols-outlined">upload_file</span>
+                    <input id="file-import-input" type="file" accept=".json">
                     <p>Import</p>
                 </button>
                 <button class="toolBtn">
                     <span class="material-symbols-outlined">download</span>
                     <p>Export</p>
                 </button>
+                <button id="printBtn" class="toolBtn">
+                    <span class="material-symbols-outlined">print</span>
+                    <p>Print</p>
+                </button>
                 <button class="toolBtn">
                     <span class="material-symbols-outlined">share</span>
                     <p>Share link</p>
                 </button>
             </div>
-            <div class="stepsContainer">
+            <div id="stepsContainer" class="stepsContainer">
                 <div class="guideSettings">
                     <div>
-                        <h1>Guide Title</h1>
-                        <p>Description</p>
-                        <p>Author</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div>
-                        <h2>Step Name</h2>
-                        <p>Description</p>
-                    </div>
-                    <div>
-                        <img src="../logo/mockup-viewer-editor.jpg">
-                    </div>
-                </div>
-                <div class="step">
-                    <div>
-                        <h2>Step Name</h2>
-                        <p>Description</p>
-                    </div>
-                    <div>
-                        <img src="../logo/mockup-viewer-editor.jpg">
-                    </div>
-                </div>
-                <div class="step">
-                    <div>
-                        <h2>Step Name</h2>
-                        <p>Description</p>
-                    </div>
-                    <div>
-                        <img src="../logo/mockup-viewer-editor.jpg">
+                        <h1 id="guideTitle">Guide Title</h1>
+                        <p id="guideDescription">Description</p>
+                        <p id="guideAuthor">Author</p>
                     </div>
                 </div>
             </div>
             <div class="guideTools editor">
-                <button><span class="material-symbols-outlined">add</span>Add step</button>
+                <button id="addStepBtn"><span class="material-symbols-outlined">add</span>Add step</button>
             </div>
         </div>
     </body>
