@@ -1,0 +1,213 @@
+/* Import Font & Icons */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+
+/* Stylings */
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: var(--font);
+    color: var(--color);
+    background: var(--primary);
+    --font: "Geist", sans-serif;;
+    --color: var(--black);
+    --black: #000;
+    --primary: #D6AFF2;
+    --accent: #c791ed;
+    --white: #f8f8f8;
+    --transition: .2s all;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 20px 0;
+}
+
+/* Navigation & Tool List */
+.nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    padding: 20px;
+}
+
+.logo{
+    width: 50px;
+}
+
+.toolList{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: auto;
+    height: auto;
+    margin: 20px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    background: var(--white);
+    border-radius: 20px;
+}
+
+.toolBtn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    width: auto;
+    height: auto;
+    background: transparent;
+    color: var(--primary);
+    border: none;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.toolBtn p{
+    display: none;
+}
+
+.toolBtn:hover{
+    background: var(--primary);
+    color: var(--white);
+}
+
+/*.toolBtn:hover p{
+    display: flex;
+}*/
+
+/* Guide Tools */
+.guideTools{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.guideTools button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 10px 20px;
+    background: var(--white);
+    color: var(--primary);
+    font-size: 1rem;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    transition: var(--transition);
+}
+
+.guideTools button:hover{
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--white);
+    padding: 10px 40px;
+}
+
+/* Steps */
+.stepsContainer{
+    width: 80%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    counter-reset: stepCount;
+}
+
+.stepsContainer > div:first-of-type{
+    margin: 20px;
+}
+
+.step, .guideSettings{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: stretch;
+    align-items: flex-start;
+    width: 100%;
+    margin: 10px 20px;
+    padding: 20px;
+    background: var(--white);
+    color: var(--black);
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+.step div{
+    width: 100%;
+    flex-shrink: 1;
+}
+
+.step img{
+    width: 100%;
+    border-radius: 12px;
+}
+
+.step::after{
+    counter-increment: stepCount;
+    content: counter(stepCount);
+    bottom: 20px;
+    left: 20px;
+    position: absolute;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* Print View */
+@media print{
+    .stepsContainer{
+        width: 90%;
+        max-width: 800px;
+    }
+
+    .step{
+        border: 2px solid #000;
+    }
+
+    .editor{
+        display: none;
+    }
+
+    .step, .guideSettings{
+        margin: 10px 20px;
+        padding: 10px 20px;
+    }
+
+    .stepsContainer > div:first-of-type{
+        margin: 0;
+        padding: 0 20px;
+    }
+
+    .nav{
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        top: 0;
+        left: auto;
+        right: 0;
+        z-index: 1000;
+    }
+
+    .logo{
+        margin: 0;
+        padding: 20px;
+        width: 60px;
+    }
+}
