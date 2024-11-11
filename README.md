@@ -14,12 +14,17 @@ Similar to tango.us/dubble.so/folge.me/magichow.co but all local - no data leave
 
 ### Additional nice to have:
 - [x] Meta data in guide (title, description, author, date)
-- [ ] Viewer for Guide JSON
-    - [ ] PDF export
-- [ ] Editor for Guide
+- [x] Viewer for Guide JSON
+    - [x] PDF export
+    - [ ] automatic file loading (url parameter/etc)
+    - [ ] removing of steps
+    - [ ] reordering steps
+    - [ ] add marker on step image (#4)
+- [x] Editor for Guide
 - [x] improve error handling
 - [ ] Blur sensitive information
 - [x] Pause/resume recording feature
+- [ ] fix open issues
 
 ### Maybe far in the future:
 - [ ] Optional cloud for sharing guide as link

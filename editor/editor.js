@@ -35,7 +35,7 @@ exportBtn.addEventListener('click', function(){
 // share guide button
 const shareBtn = document.getElementById("shareBtn");
 shareBtn.addEventListener('click', function(){
-    alert("Coming soon...")
+    alert("Coming soon...");
 });
 
 
@@ -45,6 +45,44 @@ addStepBtn.addEventListener('click', function(){
     const stepsContainer = document.getElementById("stepsContainer");
     stepsContainer.append(createStepElement("Title", "Description", "../logo/mockup-viewer-editor.jpg", "note", ""));
 });
+
+// toggle between editor and viewer mode
+function toggleMode(type = "toggle"){
+    const bodyClass = document.body.classList;
+    switch(type){
+        case "viewer":
+            // sets mode to viewer
+            if (!bodyClass.contains("viewer")) bodyClass.add("viewer");
+            break;
+        case "editor":
+            // sets mode to editor
+            if (bodyClass.contains("viewer")) bodyClass.remove("viewer");
+            break;
+        case "toggle":
+        default:
+            // toggles between the modes
+            if (bodyClass.contains("viewer")){
+                bodyClass.remove("viewer");
+            }
+            else{
+                bodyClass.add("viewer");
+            }
+            break;
+    }
+    updateContenteditability();
+}
+
+function updateContenteditability(){
+    const viewerModeActive = document.body.classList.contains("viewer");
+    const editableSteps = document.getElementById("stepsContainer").children;
+
+    for (const step of editableSteps){
+        const editableChildren = step.querySelectorAll("[contenteditable]");
+        for (const child of editableChildren){
+            child.contentEditable = viewerModeActive ? "false" : "plaintext-only";
+        }
+    }    
+}
 
 // render guide with steps
 function loadGuide(data){
@@ -83,11 +121,13 @@ function createStepElement(label, description, imgSrc, triggerAction, triggerEle
     // create title
     const title = document.createElement("h2");
     title.textContent = label;
+    title.contentEditable = "plaintext-only";
     textContainer.appendChild(title);
 
     // create description
     const desc = document.createElement("p");
     desc.textContent = description;
+    desc.contentEditable = "plaintext-only";
     textContainer.appendChild(desc);
 
     // create image
