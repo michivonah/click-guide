@@ -175,6 +175,29 @@ body.viewer .editor {
     color: var(--primary);
 }
 
+/* Step controls */
+.stepControls button{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: auto;
+    padding: 10px 20px;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 1rem;
+    border-radius: 20px;
+    border: 2px solid var(--primary);
+    transition: var(--transition);
+}
+
+.stepControls button:hover{
+    background: var(--white);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
 /* Print View */
 @media print{
     .stepsContainer{

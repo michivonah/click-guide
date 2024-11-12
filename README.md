@@ -17,7 +17,7 @@ Similar to tango.us/dubble.so/folge.me/magichow.co but all local - no data leave
 - [x] Viewer for Guide JSON
     - [x] PDF export
     - [ ] automatic file loading (url parameter/etc)
-    - [ ] removing of steps
+    - [x] removing of steps
     - [ ] reordering steps
     - [ ] add marker on step image (#4)
 - [x] Editor for Guide

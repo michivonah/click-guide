@@ -116,6 +116,7 @@ function createStepElement(label, description, imgSrc, triggerAction, triggerEle
 
     // create container for text & image
     const textContainer = document.createElement("div");
+    const stepControls = document.createElement("div");
     const imgContainer = document.createElement("div");
 
     // create title
@@ -134,6 +135,23 @@ function createStepElement(label, description, imgSrc, triggerAction, triggerEle
     const image = document.createElement("img");
     image.src = imgSrc;
     imgContainer.appendChild(image);
+
+    // create stepcontrol + delete button
+    const delBtn = document.createElement("button");
+    const delBtnIcon = document.createElement("span");
+    delBtn.textContent = "Delete step";
+    delBtnIcon.className = "material-symbols-outlined";
+    delBtnIcon.textContent = "delete";
+    delBtn.appendChild(delBtnIcon);
+
+    delBtn.addEventListener('click', function(){
+        // remove step
+        event.target.parentNode.parentNode.parentNode.remove();
+    });
+    
+    stepControls.classList = "stepControls editor";
+    stepControls.appendChild(delBtn);
+    textContainer.appendChild(stepControls);
 
     // append to main container
     container.appendChild(textContainer);
