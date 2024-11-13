@@ -45,17 +45,33 @@ document.addEventListener('click', function(){
                 const img = new Image();
                 img.src = response.screenshot;
                 img.onload = () => {
-                    const pixelZoom = 350;
-    
+                    const pixelPadding = 150;
+                    const dpr = window.devicePixelRatio || 1;
+
+                    let parentElement = element.parentNode.parentNode || element.parentNode || element;
+
+                    parentElement.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+
+                    const parentRect = parentElement.getBoundingClientRect();
+                    const viewportWidth = window.innerWidth;
+                    const viewportHeight = window.innerHeight;
+
+                    const croppedWidth = Math.min((parentRect.width + pixelPadding) * dpr, viewportWidth * dpr);
+                    const croppedHeight = Math.min((parentRect.height + pixelPadding) * dpr, viewportHeight * dpr);
+
+                    const viewportX = Math.max((parentRect.left - pixelPadding / 2) * dpr, 0);
+                    const viewportY = Math.max((parentRect.top - pixelPadding / 2) * dpr, 0);
+
                     const canvas = document.createElement("canvas");
-                    canvas.width = rect.width + pixelZoom;
-                    canvas.height = rect.height + pixelZoom;
                     const ctx = canvas.getContext("2d");
+
+                    canvas.width = croppedWidth;
+                    canvas.height = croppedHeight;
     
                     ctx.drawImage(
                         img,
-                        rect.left, rect.top, rect.width + pixelZoom, rect.height + pixelZoom, // source size
-                        0, 0, rect.width + pixelZoom, rect.height + pixelZoom // result size
+                        viewportX, viewportY, croppedWidth, croppedHeight,
+                        0, 0, croppedWidth, croppedHeight
                     );
     
                     const croppedDataUrl = canvas.toDataURL("image/jpeg");
