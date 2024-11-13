@@ -12,6 +12,7 @@ printBtn.addEventListener('click', function(){
 const importBtn = document.getElementById("importBtn");
 const fileInput = document.getElementById("file-import-input");
 importBtn.addEventListener('click', function(){
+    removeAllSteps();
     fileInput.click();
 });
 
@@ -159,6 +160,13 @@ function createStepElement(label, description, imgSrc, triggerAction, triggerEle
 
     // return step element
     return container;
+}
+
+function removeAllSteps(){
+    const steps = document.querySelectorAll(".step");
+    for (const step of steps){
+        step.remove();
+    }
 }
 
 // export guide
