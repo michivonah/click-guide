@@ -73,6 +73,12 @@ document.addEventListener('click', function(){
                         viewportX, viewportY, croppedWidth, croppedHeight,
                         0, 0, croppedWidth, croppedHeight
                     );
+
+                    // calculate coordinates of the clicked element
+                    const elementStartX = Math.max((rect.left - (parentRect.left - pixelPadding / 2)), 0);
+                    const elementStartY = Math.max((rect.top - (parentRect.top - pixelPadding / 2)), 0);
+                    const elementEndX = elementStartX + rect.width;
+                    const elementEndY = elementStartY + rect.height;
     
                     const croppedDataUrl = canvas.toDataURL("image/jpeg");
                     chrome.runtime.sendMessage({
@@ -80,7 +86,13 @@ document.addEventListener('click', function(){
                         image: croppedDataUrl,
                         stepLabel: elementText,
                         stepElement: elementSelector,
-                        triggerName: "click"
+                        triggerName: "click",
+                        elementPosition: {
+                            startX: elementStartX,
+                            startY: elementStartY,
+                            endX: elementEndX,
+                            endY: elementEndY
+                        }
                     }, (response) => {
                         console.log(response);
                     });

@@ -35,7 +35,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                     "description":"Short description of the step",
                     "action":message.triggerName,
                     "element":message.stepElement,
-                    "image":message.image
+                    "image":message.image,
+                    "elementPosition":message.elementPosition
                 }
                 steps.push(step);                
                 return sendResponse({ success: true, message: "Step successfully added to guide" });

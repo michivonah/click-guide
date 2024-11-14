@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Cl1ck Gu1de",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A browser add-on which records the steps clicked on a page and generates a easy to understand guide from it.",
   "permissions": ["scripting", "activeTab", "downloads", "tabs", "storage"],
   "host_permissions": ["<all_urls>"],
