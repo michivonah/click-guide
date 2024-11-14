@@ -101,12 +101,19 @@ function loadGuide(data){
     const stepsContainer = document.getElementById("stepsContainer");
 
     for (const step of steps){
-        const element = createStepElement(step.label, step.description, step.image, step.action, step.element);
+        const element = createStepElement(step);
         stepsContainer.append(element);
     }
 }
 
-function createStepElement(label, description, imgSrc, triggerAction, triggerElement){
+function createStepElement(step){
+    // define constants
+    const label = step.label;
+    const description = step.description;
+    const imgSrc = step.image;
+    const triggerAction = step.action;
+    const triggerElement = step.element;
+
     // create container
     const container = document.createElement("div");
     container.classList = "step";
@@ -119,6 +126,7 @@ function createStepElement(label, description, imgSrc, triggerAction, triggerEle
     const textContainer = document.createElement("div");
     const stepControls = document.createElement("div");
     const imgContainer = document.createElement("div");
+    imgContainer.classList = "imgContainer";
 
     // create title
     const title = document.createElement("h2");
@@ -136,6 +144,16 @@ function createStepElement(label, description, imgSrc, triggerAction, triggerEle
     const image = document.createElement("img");
     image.src = imgSrc;
     imgContainer.appendChild(image);
+
+    if(step.elementPosition){
+        const imageMarker = document.createElement("div");
+        imageMarker.classList = "imageMarker";
+        imageMarker.style.left = `${step.elementPosition.startX}px`;
+        imageMarker.style.top = `${step.elementPosition.startY}px`;
+        imageMarker.style.width = `${step.elementPosition.endX - step.elementPosition.startX}px`;
+        imageMarker.style.height = `${step.elementPosition.endY - step.elementPosition.startY}px`;
+        imgContainer.appendChild(imageMarker);
+    }
 
     // create stepcontrol + delete button
     const delBtn = document.createElement("button");

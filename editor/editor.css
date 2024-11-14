@@ -159,6 +159,16 @@ body.viewer .editor {
     flex-shrink: 1;
 }
 
+.imgContainer{
+    position: relative;
+    overflow: hidden;
+}
+
+.imageMarker{
+    position: absolute;
+    border: 2px solid red;
+}
+
 .step img{
     width: 100%;
     border-radius: 12px;
