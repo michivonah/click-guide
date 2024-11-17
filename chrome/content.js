@@ -6,7 +6,7 @@ const domainFormatted = window.location.host.replace(/\./g, "-");
 
 // set guide title
 chrome.storage.local.get("guideTitle", (data) => {
-    if(!data.guideTitle){
+    if(!data.guideTitle || data.guideTitle != pageTitle){
         try{
             chrome.storage.local.set({ guideTitle: pageTitle });
             chrome.storage.local.set({ exportFilename: domainFormatted });
@@ -48,7 +48,7 @@ document.addEventListener('click', function(){
                     const pixelPadding = 150;
                     const dpr = window.devicePixelRatio || 1;
 
-                    let parentElement = element.parentNode.parentNode || element.parentNode || element;
+                    let parentElement = element.parentNode || element; // element.parentNode.parentNode || 
 
                     parentElement.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
 
@@ -56,8 +56,8 @@ document.addEventListener('click', function(){
                     const viewportWidth = window.innerWidth;
                     const viewportHeight = window.innerHeight;
 
-                    const croppedWidth = Math.min((parentRect.width + pixelPadding) * dpr, viewportWidth * dpr);
-                    const croppedHeight = Math.min((parentRect.height + pixelPadding) * dpr, viewportHeight * dpr);
+                    const croppedWidth = (parentRect.width + pixelPadding) * dpr;
+                    const croppedHeight = (parentRect.height + pixelPadding) * dpr;
 
                     const viewportX = Math.max((parentRect.left - pixelPadding / 2) * dpr, 0);
                     const viewportY = Math.max((parentRect.top - pixelPadding / 2) * dpr, 0);
@@ -77,8 +77,8 @@ document.addEventListener('click', function(){
                     // calculate coordinates of the clicked element
                     const elementStartX = Math.max((rect.left - (parentRect.left - pixelPadding / 2)), 0);
                     const elementStartY = Math.max((rect.top - (parentRect.top - pixelPadding / 2)), 0);
-                    const elementEndX = elementStartX + rect.width;
-                    const elementEndY = elementStartY + rect.height;
+                    const elementEndX = elementStartX + rect.width;// + (pixelPadding / 2);
+                    const elementEndY = elementStartY + rect.height;// + (pixelPadding / 2);
     
                     const croppedDataUrl = canvas.toDataURL("image/jpeg");
                     chrome.runtime.sendMessage({

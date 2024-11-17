@@ -31,8 +31,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         case "saveStep":
             try{
                 const step = {
-                    "label":message.stepLabel,
-                    "description":"Short description of the step",
+                    "label":`Click "${message.stepLabel}"`,
+                    "description":`Here you can write anything you need to know about when clicking on "${message.stepLabel}".`,
                     "action":message.triggerName,
                     "element":message.stepElement,
                     "image":message.image,
@@ -48,7 +48,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             try{
                 let filename = "guide.json";
                 chrome.storage.local.get(["guideTitle", "exportFilename"], (data) => {
-                    if(data.guideTitle) guide.title = `Guide: ${data.guideTitle}`;
+                    if(data.guideTitle){
+                        guide.title = `Guide: ${data.guideTitle}`;
+                        guide.description = `A step by step guide about how to use ${data.guideTitle}.`;
+                    }
                     if(data.exportFilename) filename = `guide-${data.exportFilename}.json`;
                     guide.steps = steps;
                     return sendResponse({ success: true, guide: guide, filename: filename });
